@@ -7,7 +7,8 @@ import (
 	"github.com/JohnCGriffin/overflow"
 )
 
-// Multiply ...
+// Multiply returns the product of all the parsed integers in records
+// Returns error if it cannot parse string->int OR if there is int overflow
 func Multiply(records [][]string) (string, error) {
 	product := 1
 	for _, row := range records {

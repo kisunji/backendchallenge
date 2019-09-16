@@ -7,7 +7,8 @@ import (
 	"github.com/JohnCGriffin/overflow"
 )
 
-// Sum ...
+// Sum returns the sum of all the parsed integers in records
+// Returns error if it cannot parse string->int OR if there is int overflow
 func Sum(records [][]string) (string, error) {
 	var sum int
 	for _, row := range records {
