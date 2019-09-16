@@ -1,5 +1,10 @@
 # League Backend Challenge
 
+Download dependencies
+```
+go get
+```
+
 Run web server
 ```
 go run .
