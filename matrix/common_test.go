@@ -29,6 +29,14 @@ func Test_atoiMatrix(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name: "empty input returns empty matrix",
+			args: args{
+				[][]string{},
+			},
+			want:    [][]int{},
+			wantErr: false,
+		},
+		{
 			name: "float returns error",
 			args: args{
 				[][]string{
@@ -59,6 +67,16 @@ func Test_atoiMatrix(t *testing.T) {
 			want:    nil,
 			wantErr: true,
 		},
+		{
+			name: "integer less than min throws error",
+			args: args{
+				[][]string{
+					{"1", "2"},
+					{"3", "-9999999999999999999999999999"},
+				}},
+			want:    nil,
+			wantErr: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -75,6 +93,8 @@ func Test_atoiMatrix(t *testing.T) {
 }
 
 func Test_atoiSlice(t *testing.T) {
+	const MaxInt = int(^uint(0) >> 1)
+	const MinInt = -MaxInt - 1
 	type args struct {
 		slice []string
 	}
@@ -90,6 +110,14 @@ func Test_atoiSlice(t *testing.T) {
 				[]string{"1", "2", "3"},
 			},
 			want:    []int{1, 2, 3},
+			wantErr: false,
+		},
+		{
+			name: "empty input returns valid empty slice",
+			args: args{
+				[]string{},
+			},
+			want:    []int{},
 			wantErr: false,
 		},
 		{
@@ -112,6 +140,14 @@ func Test_atoiSlice(t *testing.T) {
 			name: "integer greater than max throws error",
 			args: args{
 				[]string{"1", "2", "9999999999999999999999999999"},
+			},
+			want:    nil,
+			wantErr: true,
+		},
+		{
+			name: "integer less than min throws error",
+			args: args{
+				[]string{"1", "2", "-9999999999999999999999999999"},
 			},
 			want:    nil,
 			wantErr: true,

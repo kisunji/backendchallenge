@@ -20,7 +20,15 @@ func TestEcho(t *testing.T) {
 					{"4", "5", "6"},
 					{"7", "8", "9"},
 				}},
-			want:    "1,2,3\n4,5,6\n7,8,9\n",
+			want:    "1,2,3\n4,5,6\n7,8,9",
+			wantErr: false,
+		},
+		{
+			name: "empty matrix",
+			args: args{
+				[][]string{},
+			},
+			want:    "",
 			wantErr: false,
 		},
 	}

@@ -6,6 +6,8 @@ func Invert(records [][]string) (string, error) {
 }
 
 // Credit: https://gist.github.com/tanaikech/5cb41424ff8be0fdf19e78d375b6adb8
+// Returns nil if len(records) < 1
+// Panics if records is a jagged array (extractCSV() protects against jagged arrays)
 func transpose(records [][]string) [][]string {
 	if len(records) < 1 {
 		return nil
