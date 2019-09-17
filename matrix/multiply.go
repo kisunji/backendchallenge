@@ -2,6 +2,7 @@ package matrix
 
 import (
 	"errors"
+	"log"
 	"strconv"
 
 	"github.com/JohnCGriffin/overflow"
@@ -10,30 +11,31 @@ import (
 // Multiply returns the product of all the parsed integers in records
 // Returns error if it cannot parse string->int OR if there is int overflow
 func Multiply(records [][]string) (string, error) {
-	product := 1
-	for _, row := range records {
-		rowSum, err := productArray(row)
+	intMatrix, err := AtoiMatrix(records)
+	log.Println(intMatrix)
+	if err != nil {
+		return "", err
+	}
+	matrixProduct := 1
+	for _, row := range intMatrix {
+		rowProduct, err := productSlice(row)
 		if err != nil {
 			return "", err
 		}
 		var ok bool
-		product, ok = overflow.Mul(product, rowSum)
+		matrixProduct, ok = overflow.Mul(matrixProduct, rowProduct)
 		if !ok {
 			return "", errors.New("Overflow detected")
 		}
 	}
-	return strconv.Itoa(product), nil
+	return strconv.Itoa(matrixProduct), nil
 }
 
-func productArray(arr []string) (int, error) {
+func productSlice(arr []int) (int, error) {
 	product := 1
 	for _, x := range arr {
-		parsed, err := strconv.Atoi(x)
-		if err != nil {
-			return 0, err
-		}
 		var ok bool
-		product, ok = overflow.Mul(product, parsed)
+		product, ok = overflow.Mul(product, x)
 		if !ok {
 			return 0, errors.New("Overflow detected")
 		}

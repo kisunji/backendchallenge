@@ -1,5 +1,10 @@
 # League Backend Challenge
 
+## Comments
+The instructions specified a square matrix input (NxN) all operations can technically handle MxN inputs.
+
+`matrix.IsSquareMatrix` is unused but can be used to validate if required.
+
 Download dependencies
 ```
 go get

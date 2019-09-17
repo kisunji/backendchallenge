@@ -44,12 +44,12 @@ func handleCSV(op matrix.Operation) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		records, err := extractCSV(r)
 		if err != nil {
-			io.WriteString(w, fmt.Sprintf("CSV parsing error: %s", err.Error()))
+			io.WriteString(w, fmt.Sprintf("error: CSV Parsing: %s", err.Error()))
 			return
 		}
 		response, err := op(records)
 		if err != nil {
-			io.WriteString(w, fmt.Sprintf("error %s", err.Error()))
+			io.WriteString(w, fmt.Sprintf("error: Matrix Operation: %s", err.Error()))
 			return
 		}
 		io.WriteString(w, response)
@@ -64,7 +64,7 @@ func extractCSV(r *http.Request) ([][]string, error) {
 	defer file.Close()
 
 	if !strings.HasSuffix(fileHeader.Filename, ".csv") {
-		return nil, errors.New("File is not .csv")
+		return nil, errors.New("File extension must be .csv")
 	}
 
 	return csv.NewReader(file).ReadAll()
