@@ -19,7 +19,7 @@ func IsSquareMatrix(records [][]string) bool {
 	return true
 }
 
-// AtoiMatrix applies strconv.Atoi to each AtoiSlice to each slice in the input
+// AtoiMatrix applies AtoiSlice to each slice in the input
 func AtoiMatrix(records [][]string) ([][]int, error) {
 	intMatrix := make([][]int, len(records))
 	for i, row := range records {
