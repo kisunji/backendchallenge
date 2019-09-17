@@ -17,7 +17,7 @@ go run .
 
 Send request
 ```
-curl -F 'file=@/path/matrix.csv' "localhost:8080/echo"
+curl -F 'file=@matrix.csv' "localhost:8080/echo"
 ```
 
 ## What we're looking for
